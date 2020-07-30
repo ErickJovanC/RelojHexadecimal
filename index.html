@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj RGB</title>
+    <style>
+        body{
+            font-family: monospace;
+            color: gray;
+            font-size:150px;
+            text-align: center;
+            padding-top: 15%;            
+        }
+
+        #reloj{
+            height: 100%;
+        }
+        #hexa{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="reloj">
+    </div>
+    <div id="hexa">
+    </div>
+    <script>
+        const body = document.querySelector('body');
+        const reloj = document.querySelector('#reloj');
+        const hexa = document.querySelector('#hexa');
+
+        setInterval (function(){
+            let tiempo = new Date();
+            let h = tiempo.getHours();
+            let m = tiempo.getMinutes();
+            let s = tiempo.getSeconds();
+
+            if(s<=9){ s = '0' + s;}
+            if(m<=9){ m = '0' + m;}
+            if(h<=9){ h = '0' + h;}
+
+            let color = '#' + h + m + s;
+            body.style.backgroundColor = color;
+
+            let amPm = 'am';
+
+            if(h>12){h-=12; amPm = ' pm'; }
+            if(h<=9){ h = '0' + h;}
+            let hora = h + ':' + m + ':' + s + amPm;
+            reloj.textContent = hora;
+            hexa.textContent = 'Background ' + color;
+            //console.log(reloj.textContent);
+        }, 1000);
+    </script>
+</body>
+</html>
